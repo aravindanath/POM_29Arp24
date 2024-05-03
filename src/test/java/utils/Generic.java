@@ -6,9 +6,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.nio.file.Files;
 import java.time.Duration;
 import java.util.Locale;
 import java.util.Properties;
@@ -89,12 +91,8 @@ public class Generic
     }
 
     public static void takeScreenshot(WebDriver driver){
-        TakesScreenshot scrShot = (TakesScreenshot)driver;
-        File srcFile =scrShot.getScreenshotAs(OutputType.FILE);
-        File destFile = new File("./screenshots.png");
-//        FileUtils.copyFile(sourceFile, targetFile);
-//        FileUtils.copyFile(SrcFile, DestFile);
-//        Files.copy(srcFile.toPath(),destFile);
+        File f = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+//        Files.copy(f, new File("./screenshots.png").toPath());
     }
 
 
@@ -123,5 +121,24 @@ public class Generic
     public static String randomDate() {
         Faker faker = new Faker(new Locale("en-IND"));
         return faker.date().birthday(1,40).toString();
+    }
+
+    public static void verifyTitle(WebElement element, String title){
+        String actual = element.getText();
+        Assert.assertEquals(actual, title,"Title Not Match");
+    }
+
+    public static void  verifyElementEnable(WebElement element){
+        Assert.assertTrue(element.isEnabled(),"Button is Not Enabled");
+    }
+
+    public static void  verifyElementDisble(WebElement element){
+        Assert.assertFalse(element.isEnabled(),"Button is Enabled");
+    }
+
+
+    public static void verifyPageTitle(WebDriver pgtitle, String title){
+        String actual = pgtitle.getTitle();
+        Assert.assertEquals(actual, title,"Title Not Match");
     }
 }

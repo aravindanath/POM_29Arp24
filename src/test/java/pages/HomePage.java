@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import utils.Generic;
 
 public class HomePage extends BaseClass{
 
@@ -23,6 +24,7 @@ public class HomePage extends BaseClass{
     public void navigateToLoginPage(){
         myAccountButton.click();
         loginButton.click();
+        Generic.verifyPageTitle(driver,"Accoint Login");
     }
 
 

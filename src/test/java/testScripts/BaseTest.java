@@ -14,10 +14,10 @@ import java.time.Duration;
 public class BaseTest {
 
     protected WebDriver driver;
-
-    @Parameters("browser")
+    String browser = "chrome";
+//    @Parameters("browser")
     @BeforeClass
-    public void setUp(String browser){
+    public void setUp(){
 
         if(browser.equalsIgnoreCase("chrome")){
             driver = new ChromeDriver();
